@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './Content.module.css';
+import {Post} from "../Post/Post";
 
 function Content() {
     return (
@@ -13,15 +14,8 @@ function Content() {
                <textarea/>
                <button type={"button"}/>
            </div>
-           <div className={s.post}>
-               <div>
-                   <img src={'https://picfiles.alphacoders.com/318/31834.jpg'}/>
-                   <span> like </span> "23"
-               </div>
-               <div> Привет как дела </div>
-
-           </div>
-           <div>post</div>
+          <Post message={'Привет как дела?'}/>
+          <Post message={'Пока петух'}/>
         </div>
     );
 }

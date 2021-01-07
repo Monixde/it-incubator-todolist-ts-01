@@ -1,0 +1,11 @@
+.post img {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+}
+
+.post {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}

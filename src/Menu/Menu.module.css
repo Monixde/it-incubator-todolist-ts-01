@@ -1,4 +1,7 @@
 .men {
     background-color: aquamarine;
     grid-area: m;
+    font-size: 15pt;
+    font-weight: bold;
+    font-style: italic;
 }
