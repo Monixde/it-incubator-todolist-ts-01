@@ -1,0 +1,32 @@
+.con {
+    background-color: bisque;
+    grid-area: c;
+
+}
+
+.con img  {
+    width: 950px;
+    position: relative;
+}
+
+.person {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+
+}
+.person img {
+    width: 150px;
+}
+
+.post img {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+}
+
+.post {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}

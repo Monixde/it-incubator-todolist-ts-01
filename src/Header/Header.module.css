@@ -1,0 +1,9 @@
+.head {
+    display: grid;
+    background-color: blueviolet;
+    grid-area: h;
+}
+.head img {
+    width: 50px;
+}
+
