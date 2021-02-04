@@ -14,3 +14,9 @@
   grid-gap: 10px;
 }
 
+.App_content {
+
+  background-color: bisque;
+  grid-area: c;
+
+}

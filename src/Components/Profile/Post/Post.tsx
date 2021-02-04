@@ -1,8 +1,10 @@
 import s from "./Post.module.css";
 import React from "react";
 
-type post ={
+export type post ={
     message: string
+    id: number
+    likeCount: number
 
 }
 
@@ -11,8 +13,7 @@ export function Post(props:post) {
         <div className={s.post}>
         <div>
             <img src={'https://picfiles.alphacoders.com/318/31834.jpg'}/>
-    <span> like </span> "23"
-    </div>
+    <span> like </span> {props.likeCount}   </div>
     <div> {props.message} </div>
 
     </div>
