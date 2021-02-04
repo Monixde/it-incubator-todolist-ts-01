@@ -16,7 +16,7 @@ function App() {
 
 
     return (
-        <BrowserRouter>
+
             <div className="App">
                 <Header/>
                 <Menu/>
@@ -31,7 +31,7 @@ function App() {
 
 
             </div>
-        </BrowserRouter>
+
     );
 }
 

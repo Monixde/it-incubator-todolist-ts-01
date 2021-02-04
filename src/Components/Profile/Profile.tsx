@@ -9,7 +9,6 @@ export type ProfileProps = {
 function Profile(props: ProfileProps) {
 
 
-
     let postsElements = props.post.map(p => {
             return <Post
                 likeCount={p.likeCount}
@@ -18,7 +17,7 @@ function Profile(props: ProfileProps) {
             />
         }
     )
-
+    const addPost = ()=> alert('Привет')
     return (
         <div className={s.con}>
             <div><img src={'https://images.by.prom.st/94678845_w640_h640_burenie-skvazhin-na.jpg'}/></div>
@@ -32,7 +31,7 @@ function Profile(props: ProfileProps) {
                 <textarea/>
             </div>
             <div>
-                <input type={"button"} value={"кнопка"} />
+                <input onClick={addPost} type={"button"} value={"кнопка"}/>
             </div>
             {postsElements}
         </div>
