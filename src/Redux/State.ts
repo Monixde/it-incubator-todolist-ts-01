@@ -1,6 +1,8 @@
-import {rerenderTree} from "../index";
 
 
+let rerenderTree = (state:rootStateType) => {
+
+}
 
 type MessageType = {
     id: number
@@ -99,6 +101,9 @@ export const addMessage = (messageText: string) => {
 export const updateNewPost = (textChange:string) => {
     state.profile.newPosts = textChange
     rerenderTree(state)
+}
+export const observer = (lithen:any) => {
+    rerenderTree = lithen
 }
 
 export default state;
