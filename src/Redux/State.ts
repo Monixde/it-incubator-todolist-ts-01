@@ -1,32 +1,37 @@
-type MessageType ={
+import {rerenderTree} from "../index";
+
+
+
+type MessageType = {
     id: number
     message: string
 }
 
-type DialogType ={
+type DialogType = {
     id: number
     name: string
     route: string
 
 }
-type PostsType ={
+export type PostsType = {
     id: number
     message: string
     likeCount: number
 }
 type profilePageType = {
     posts: Array<PostsType>
+    newPosts: string
 
 }
 type dialogsPageType = {
     dialog: Array<DialogType>
     message: Array<MessageType>
 }
-type rootStateType = {
+export type rootStateType = {
     profile: profilePageType
     dialogs: dialogsPageType
-    }
-let state = {
+}
+let state: rootStateType = {
     profile: {
         posts: [
             {id: 1, message: 'Привет', likeCount: 152},
@@ -35,7 +40,8 @@ let state = {
             {id: 1, message: 'А у тебя', likeCount: 13},
             {id: 1, message: 'Hello', likeCount: 12},
             {id: 1, message: 'Hello', likeCount: 132},
-        ]
+        ],
+        newPosts: ''
     },
     dialogs: {
         dialog: [
@@ -48,14 +54,51 @@ let state = {
         ],
 
         message: [
-            {id: 1, message: 'What',  },
-            {id: 1, message: 'You',  },
-            {id: 1, message: 'Doing',  },
-            {id: 1, message: 'Now', },
-            {id: 1, message: 'Hello',  },
-            {id: 1, message: 'My friend',  },
+            {id: 1, message: 'What',},
+            {id: 1, message: 'You',},
+            {id: 1, message: 'Doing',},
+            {id: 1, message: 'Now',},
+            {id: 1, message: 'Hello',},
+            {id: 1, message: 'My friend',},
         ]
     }
+}
+
+
+
+export const addPost = () => {
+
+
+    const newPost: PostsType = {
+        id: new Date().getTime(),
+        message: state.profile.newPosts,
+        likeCount: 0
+    }
+    state.profile.posts.push(newPost)
+    state.profile.newPosts = ''
+
+    rerenderTree(state)
+
+}
+
+export const addMessage = (messageText: string) => {
+
+
+    const newMessage: MessageType = {
+        id: new Date().getTime(),
+        message: messageText
+
+    }
+    state.dialogs.message.push(newMessage)
+    rerenderTree(state)
+
+
+    console.log(state.dialogs.message)
+}
+
+export const updateNewPost = (textChange:string) => {
+    state.profile.newPosts = textChange
+    rerenderTree(state)
 }
 
 export default state;

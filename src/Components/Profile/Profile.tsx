@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './Profile.module.css';
 import {Post, post} from "./Post/Post";
 
 export type ProfileProps = {
     post: Array<post>
+    addPost: (postText: string) => void
+    onChange: (newText: string) => void
+    value: string
+
 }
 
 function Profile(props: ProfileProps) {
@@ -17,7 +21,18 @@ function Profile(props: ProfileProps) {
             />
         }
     )
-    const addPost = ()=> alert('Привет')
+
+
+    let addPost = () => {
+
+
+        props.addPost(props.value)
+
+
+    }
+    let updateNewChange = (e: ChangeEvent<HTMLTextAreaElement>) => props.onChange(e.currentTarget.value)
+
+
     return (
         <div className={s.con}>
             <div><img src={'https://images.by.prom.st/94678845_w640_h640_burenie-skvazhin-na.jpg'}/></div>
@@ -28,7 +43,7 @@ function Profile(props: ProfileProps) {
                 <div>данные</div>
             </div>
             <div>
-                <textarea/>
+                <textarea onChange={updateNewChange} value={props.value}/>
             </div>
             <div>
                 <input onClick={addPost} type={"button"} value={"кнопка"}/>

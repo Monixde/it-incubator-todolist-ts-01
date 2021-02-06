@@ -14,7 +14,9 @@ export function Dialog (props: PersonType) {
     return (
             <div className={s.dialog}>
                 <NavLink to={props.route}> {props.name}</NavLink>
+
             </div>
+
 
 
     )
