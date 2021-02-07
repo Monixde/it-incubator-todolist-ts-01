@@ -1,4 +1,4 @@
-let rerenderTree = (state: rootStateType) => {
+let rerenderTree = () => {
 
 }
 
@@ -76,7 +76,7 @@ export const addPost = () => {
     state.profile.posts.push(newPost)
     state.profile.newPosts = ''
 
-    rerenderTree(state)
+    rerenderTree()
 
 }
 
@@ -89,7 +89,7 @@ export const addMessage = (messageText: string) => {
 
     }
     state.dialogs.message.push(newMessage)
-    rerenderTree(state)
+    rerenderTree()
 
 
     console.log(state.dialogs.message)
@@ -97,9 +97,9 @@ export const addMessage = (messageText: string) => {
 
 export const updateNewPost = (textChange: string) => {
     state.profile.newPosts = textChange
-    rerenderTree(state)
+    rerenderTree()
 }
-export const observer = (lithen: any) => {
+export const observer = (lithen: ()=>void) => {
     rerenderTree = lithen
 }
 
