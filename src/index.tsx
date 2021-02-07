@@ -7,13 +7,13 @@ import {BrowserRouter} from "react-router-dom";
 import {observer} from "./Redux/State";
 
 
-export let rerenderTree =() => {
-   ReactDOM.render(
-       <BrowserRouter>
-          <App
-          />
-       </BrowserRouter>,
-       document.getElementById('root'));
+export let rerenderTree = () => {
+    ReactDOM.render(
+        <BrowserRouter>
+            <App
+            />
+        </BrowserRouter>,
+        document.getElementById('root'));
 
 }
 rerenderTree()

@@ -1,6 +1,4 @@
-
-
-let rerenderTree = (state:rootStateType) => {
+let rerenderTree = (state: rootStateType) => {
 
 }
 
@@ -67,7 +65,6 @@ let state: rootStateType = {
 }
 
 
-
 export const addPost = () => {
 
 
@@ -98,11 +95,11 @@ export const addMessage = (messageText: string) => {
     console.log(state.dialogs.message)
 }
 
-export const updateNewPost = (textChange:string) => {
+export const updateNewPost = (textChange: string) => {
     state.profile.newPosts = textChange
     rerenderTree(state)
 }
-export const observer = (lithen:any) => {
+export const observer = (lithen: any) => {
     rerenderTree = lithen
 }
 

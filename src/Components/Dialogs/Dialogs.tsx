@@ -8,24 +8,23 @@ type DialogProps = {
 
     dialog: Array<PersonType>
     message: Array<MessagesType>
-    addMessage:(messageText:string)=>void
+    addMessage: (messageText: string) => void
 }
 
 
 export function Dialogs(props: DialogProps) {
 
 
-
     let newMessage = React.createRef<HTMLTextAreaElement>()
-    const addMessages = ()=> {
-        if(newMessage.current)
-        props.addMessage(newMessage.current.value)
+    const addMessages = () => {
+        if (newMessage.current)
+            props.addMessage(newMessage.current.value)
 
     }
 
     let dialogsElements = props.dialog.map(t => {
         return <Dialog
-            key = {t.id}
+            key={t.id}
             name={t.name}
             id={t.id}
             route={`'/dialogs/'${t.id}`}

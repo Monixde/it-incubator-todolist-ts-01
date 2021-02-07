@@ -6,7 +6,7 @@ export type MessagesType = {
     id: number
 }
 
-export function Messages (props: MessagesType) {
+export function Messages(props: MessagesType) {
     return (
         <div className={s.messages}>
             <div className={s.message}> {props.message}</div>
