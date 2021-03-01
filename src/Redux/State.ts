@@ -1,6 +1,7 @@
-let rerenderTree = () => {
 
-}
+
+
+
 
 type MessageType = {
     id: number
@@ -31,76 +32,86 @@ export type rootStateType = {
     profile: profilePageType
     dialogs: dialogsPageType
 }
-let state: rootStateType = {
-    profile: {
-        posts: [
-            {id: 1, message: 'Привет', likeCount: 152},
-            {id: 1, message: 'Как Жизнь молодая', likeCount: 122},
-            {id: 1, message: 'Неплохо', likeCount: 12},
-            {id: 1, message: 'А у тебя', likeCount: 13},
-            {id: 1, message: 'Hello', likeCount: 12},
-            {id: 1, message: 'Hello', likeCount: 132},
-        ],
-        newPosts: ''
+
+
+let store  = {
+    _state:  {
+        profile: {
+            posts: [
+                {id: 1, message: 'Привет', likeCount: 152},
+                {id: 1, message: 'Как Жизнь молодая', likeCount: 122},
+                {id: 1, message: 'Неплохо', likeCount: 12},
+                {id: 1, message: 'А у тебя', likeCount: 13},
+                {id: 1, message: 'Hello', likeCount: 12},
+                {id: 1, message: 'Hello', likeCount: 132},
+            ],
+            newPosts: ''
+        },
+        dialogs: {
+            dialog: [
+                {id: 1, name: 'Даник', route: '2'},
+                {id: 1, name: 'Артем', route: '1'},
+                {id: 1, name: 'Оля', route: '3'},
+                {id: 1, name: 'Гриша', route: '4'},
+                {id: 1, name: 'Максим', route: '5'},
+                {id: 1, name: 'Hello', route: '6'},
+            ],
+
+            message: [
+                {id: 1, message: 'What',},
+                {id: 1, message: 'You',},
+                {id: 1, message: 'Doing',},
+                {id: 1, message: 'Now',},
+                {id: 1, message: 'Hello',},
+                {id: 1, message: 'My friend',},
+            ]
+        }
     },
-    dialogs: {
-        dialog: [
-            {id: 1, name: 'Даник', route: '2'},
-            {id: 1, name: 'Артем', route: '1'},
-            {id: 1, name: 'Оля', route: '3'},
-            {id: 1, name: 'Гриша', route: '4'},
-            {id: 1, name: 'Максим', route: '5'},
-            {id: 1, name: 'Hello', route: '6'},
-        ],
-
-        message: [
-            {id: 1, message: 'What',},
-            {id: 1, message: 'You',},
-            {id: 1, message: 'Doing',},
-            {id: 1, message: 'Now',},
-            {id: 1, message: 'Hello',},
-            {id: 1, message: 'My friend',},
-        ]
-    }
-}
+    getState (){
+        this._state
+    },
+    rerenderTree  ()  {
+    },
+    addPost  ()  {
 
 
-export const addPost = () => {
+        const newPost: PostsType = {
+            id: new Date().getTime(),
+            message: this._state.profile.newPosts,
+            likeCount: 0
+        }
+        this._state.profile.posts.push(newPost)
+        this._state.profile.newPosts = ''
+
+        this.rerenderTree()
+
+    },
+    updateNewPost (textChange: string)  {
+        this._state.profile.newPosts = textChange
+        this.rerenderTree()
+    },
+    observer (lithen: ()=>void) {
+        this.rerenderTree = lithen
+    },
+    addMessage (messageText: string) {
 
 
-    const newPost: PostsType = {
-        id: new Date().getTime(),
-        message: state.profile.newPosts,
-        likeCount: 0
-    }
-    state.profile.posts.push(newPost)
-    state.profile.newPosts = ''
+        const newMessage: MessageType = {
+            id: new Date().getTime(),
+            message: messageText
 
-    rerenderTree()
-
-}
-
-export const addMessage = (messageText: string) => {
+        }
+        this._state.dialogs.message.push(newMessage)
+        this.rerenderTree()
 
 
-    const newMessage: MessageType = {
-        id: new Date().getTime(),
-        message: messageText
 
     }
-    state.dialogs.message.push(newMessage)
-    rerenderTree()
-
-
-    console.log(state.dialogs.message)
 }
 
-export const updateNewPost = (textChange: string) => {
-    state.profile.newPosts = textChange
-    rerenderTree()
-}
-export const observer = (lithen: ()=>void) => {
-    rerenderTree = lithen
-}
 
-export default state;
+
+
+
+
+export default store;
