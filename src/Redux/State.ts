@@ -1,8 +1,3 @@
-
-
-
-
-
 type MessageType = {
     id: number
     message: string
@@ -32,10 +27,19 @@ export type rootStateType = {
     profile: profilePageType
     dialogs: dialogsPageType
 }
+export type StoreType = {
+    _state: rootStateType
+    getState: () => rootStateType
+    _rerenderTree: () => void
+    addPost: (postText: string) => void
+    updateNewPost: (textChange: string) => void
+    observer: (lithen: () => void) => void
+    addMessage: (messageText: string) => void
+}
 
 
-let store  = {
-    _state:  {
+let store: StoreType = {
+    _state: {
         profile: {
             posts: [
                 {id: 1, message: 'Привет', likeCount: 152},
@@ -67,12 +71,17 @@ let store  = {
             ]
         }
     },
-    getState (){
-        this._state
+    getState() {
+        return this._state
     },
-    rerenderTree  ()  {
+    _rerenderTree() {
     },
-    addPost  ()  {
+    updateNewPost(textChange: string) {
+
+        this._state.profile.newPosts = textChange
+        this._rerenderTree()
+    },
+    addPost() {
 
 
         const newPost: PostsType = {
@@ -82,18 +91,14 @@ let store  = {
         }
         this._state.profile.posts.push(newPost)
         this._state.profile.newPosts = ''
+        this._rerenderTree()
 
-        this.rerenderTree()
+    },
 
+    observer(lithen) {
+        this._rerenderTree = lithen
     },
-    updateNewPost (textChange: string)  {
-        this._state.profile.newPosts = textChange
-        this.rerenderTree()
-    },
-    observer (lithen: ()=>void) {
-        this.rerenderTree = lithen
-    },
-    addMessage (messageText: string) {
+    addMessage(messageText: string) {
 
 
         const newMessage: MessageType = {
@@ -102,16 +107,13 @@ let store  = {
 
         }
         this._state.dialogs.message.push(newMessage)
-        this.rerenderTree()
-
+        this._rerenderTree()
 
 
     }
 }
 
 
-
-
-
-
 export default store;
+// @ts-ignore
+window.store = store;

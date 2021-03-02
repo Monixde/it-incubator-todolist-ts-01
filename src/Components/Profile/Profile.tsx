@@ -29,6 +29,7 @@ function Profile(props: ProfileProps) {
         props.addPost(props.value)
 
 
+
     }
     let updateNewChange = (e: ChangeEvent<HTMLTextAreaElement>) => props.onChange(e.currentTarget.value)
 

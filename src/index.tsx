@@ -10,7 +10,7 @@ import store from "./Redux/State";
 export let rerenderTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={store.getState()}
+            <App state={store}
 
             />
         </BrowserRouter>,

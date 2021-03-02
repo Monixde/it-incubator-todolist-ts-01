@@ -7,15 +7,16 @@ import {Dialogs} from "./Components/Dialogs/Dialogs";
 import {Route} from 'react-router-dom';
 import {Music} from './Components/Music/Music';
 import {Settings} from "./Components/Settings/Settings";
-import store from "./Redux/State";
+import  {StoreType} from "./Redux/State";
 
 type StateType= {
-    state: ()=>void
+    state: StoreType
 }
 
 
 
 function App(props: StateType) {
+
 
 
     return (
@@ -24,11 +25,11 @@ function App(props: StateType) {
             <Header/>
             <Menu/>
             <div className={"App_content"}>
-                <Route path={'/Dialogs'} render={() => <Dialogs addMessage={store.addMessage} dialog={store._state.dialogs.dialog}
-                                                                message={store._state.dialogs.message}/>}/>
+                <Route path={'/Dialogs'} render={() => <Dialogs addMessage={props.state.addMessage.bind(props.state)} dialog={props.state._state.dialogs.dialog}
+                                                                message={props.state._state.dialogs.message}/>}/>
                 <Route path={'/Profile'}
-                       render={() => <Profile value={store._state.profile.newPosts} onChange={store.updateNewPost} addPost={store.addPost.bind(store)}
-                                              post={store._state.profile.posts}/>}/>
+                       render={() => <Profile value={props.state._state.profile.newPosts} onChange={props.state.updateNewPost.bind(props.state)} addPost={props.state.addPost.bind(props.state)}
+                                              post={props.state._state.profile.posts}/>}/>
                 <Route path={'/Music'} render={() => <Music/>}/>
                 <Route path={'/Settings'} render={() => <Settings/>}/>
 
