@@ -35,8 +35,18 @@ export type StoreType = {
     updateNewPost: (textChange: string) => void
     observer: (lithen: () => void) => void
     addMessage: (messageText: string) => void
+    dispatch: (action:any)=> void
 }
 
+type AddPostType = {
+    type: 'ADD-POST'
+}
+type updateNewPostChangeType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    textChange: string
+}
+
+type DispatchType = AddPostType | updateNewPostChangeType
 
 let store: StoreType = {
     _state: {
@@ -110,8 +120,39 @@ let store: StoreType = {
         this._rerenderTree()
 
 
+    },
+    dispatch(action: DispatchType) {
+        if(action.type === 'ADD-POST') {
+            const newPost: PostsType = {
+                id: new Date().getTime(),
+                message: this._state.profile.newPosts,
+                likeCount: 0
+            }
+            this._state.profile.posts.push(newPost)
+            this._state.profile.newPosts = ''
+            this._rerenderTree()
+        }
+        else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profile.newPosts = action.textChange
+            this._rerenderTree()
+        }
+
     }
 }
+
+export const addPostActionCreator= (): AddPostType => {
+    return {
+        type: 'ADD-POST'
+    }
+}
+
+export const updateNewPostChange= (value: string): updateNewPostChangeType => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        textChange: value
+    }
+}
+
 
 
 export default store;

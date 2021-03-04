@@ -1,14 +1,16 @@
 import React, {ChangeEvent} from 'react';
 import s from './Profile.module.css';
 import {Post, post} from "./Post/Post";
+import {addPostActionCreator, updateNewPostChange} from "../../Redux/State";
 
 export type ProfileProps = {
     post: Array<post>
-    addPost: (postText: string) => void
-    onChange: (newText: string) => void
+    // addPost: (postText: string) => void
+    Dispatch: (action:object) => void
     value: string
 
 }
+
 
 function Profile(props: ProfileProps) {
 
@@ -26,12 +28,15 @@ function Profile(props: ProfileProps) {
     let addPost = () => {
 
 
-        props.addPost(props.value)
+        props.Dispatch(addPostActionCreator())
 
 
 
     }
-    let updateNewChange = (e: ChangeEvent<HTMLTextAreaElement>) => props.onChange(e.currentTarget.value)
+    let updateNewChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let value =  e.currentTarget.value
+            props.Dispatch(updateNewPostChange(value))
+    }
 
 
     return (
