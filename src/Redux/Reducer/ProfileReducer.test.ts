@@ -1,4 +1,5 @@
-import {addPostActionCreator} from "../State";
+import {addPostActionCreator} from "./ProfileReducer";
+
 
 test('profile',()=>{
     let post = {}

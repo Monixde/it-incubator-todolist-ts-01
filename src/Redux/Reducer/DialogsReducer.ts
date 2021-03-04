@@ -1,4 +1,4 @@
-import {DispatchType, MessageType} from "../State";
+import {AddMessageType, DispatchType, MessageType, UpdateNewMessageType} from "../State";
 
 
 const dialogsReducer = (state: any, action: DispatchType) => {
@@ -22,5 +22,19 @@ const dialogsReducer = (state: any, action: DispatchType) => {
             return state
     }
 }
+export const updateNewMessageChange = (value: string): UpdateNewMessageType => {
+    return {
+        type: "UPDATE-NEW-MESSAGE-TEXT",
+        value: value
+    }
+}
+
+export const addMessageActionCreator = (): AddMessageType => {
+    return {
+        type: 'ADD-MESSAGE'
+    }
+}
+
+
 
 export default dialogsReducer;

@@ -141,31 +141,6 @@ let store: StoreType = {
     }
 }
 
-export const addPostActionCreator = (): AddPostType => {
-    return {
-        type: 'ADD-POST'
-    }
-}
-
-export const updateNewPostChange = (value: string): updateNewPostChangeType => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        textChange: value
-    }
-}
-export const updateNewMessageChange = (value: string): UpdateNewMessageType => {
-        return {
-            type: "UPDATE-NEW-MESSAGE-TEXT",
-            value: value
-        }
-}
-
-export const addMessageActionCreator = (): AddMessageType => {
-    return {
-        type: 'ADD-MESSAGE'
-    }
-}
-
 
 export default store;
 // @ts-ignore

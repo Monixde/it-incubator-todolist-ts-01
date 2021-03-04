@@ -1,4 +1,4 @@
-import {DispatchType, PostsType, profilePageType} from "../State";
+import {AddPostType, DispatchType, PostsType, profilePageType, updateNewPostChangeType} from "../State";
 
 
  const profileReducer = (state:profilePageType,action:DispatchType) => {
@@ -23,5 +23,19 @@ import {DispatchType, PostsType, profilePageType} from "../State";
             return state
     }
 
+}
+
+
+export const addPostActionCreator = (): AddPostType => {
+    return {
+        type: 'ADD-POST'
+    }
+}
+
+export const updateNewPostChange = (value: string): updateNewPostChangeType => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        textChange: value
+    }
 }
 export default profileReducer;

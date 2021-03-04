@@ -1,7 +1,9 @@
 import React, {ChangeEvent} from 'react';
 import s from './Profile.module.css';
 import {Post, post} from "./Post/Post";
-import {addPostActionCreator, updateNewPostChange} from "../../Redux/State";
+import {addPostActionCreator, updateNewPostChange} from "../../Redux/Reducer/ProfileReducer";
+import {Button} from "@material-ui/core";
+
 
 export type ProfileProps = {
     post: Array<post>
@@ -52,7 +54,8 @@ function Profile(props: ProfileProps) {
                 <textarea onChange={updateNewChange} value={props.value}/>
             </div>
             <div>
-                <input onClick={addPost} type={"button"} value={"кнопка"}/>
+                <Button onClick={addPost} variant={"contained"}  color={"primary"} > Send </Button>
+                
             </div>
             {postsElements}
         </div>

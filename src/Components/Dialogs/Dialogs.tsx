@@ -3,7 +3,10 @@ import s from './Dialogs.module.css'
 
 import {Dialog, PersonType} from "./Dialog/Dialog";
 import {Messages, MessagesType} from "./messages/Messages";
-import {addMessageActionCreator, updateNewMessageChange} from "../../Redux/State";
+import {addMessageActionCreator, updateNewMessageChange} from "../../Redux/Reducer/DialogsReducer";
+import {Button, colors, InputBase, InputLabel, TextField} from "@material-ui/core";
+
+
 
 type DialogProps = {
 
@@ -60,7 +63,8 @@ export function Dialogs(props: DialogProps) {
             </div>
             <div>
                 <textarea onChange={changeMessages}></textarea>
-                <button onClick={addMessages}>Add</button>
+
+                <Button onClick={addMessages} variant={"contained"} name={'Add'} color={"primary"} > Add </Button>
             </div>
         </div>
     )

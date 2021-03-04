@@ -1,4 +1,4 @@
-import {addPostActionCreator} from "./State";
+import {addPostActionCreator} from "./Reducer/ProfileReducer";
 
 
 test('test state', ()=>{
