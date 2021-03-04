@@ -22,6 +22,7 @@ type profilePageType = {
 type dialogsPageType = {
     dialog: Array<DialogType>
     message: Array<MessageType>
+    newMessage: string
 }
 export type rootStateType = {
     profile: profilePageType
@@ -35,7 +36,7 @@ export type StoreType = {
     updateNewPost: (textChange: string) => void
     observer: (lithen: () => void) => void
     addMessage: (messageText: string) => void
-    dispatch: (action:any)=> void
+    dispatch: (action: any) => void
 }
 
 type AddPostType = {
@@ -45,8 +46,15 @@ type updateNewPostChangeType = {
     type: 'UPDATE-NEW-POST-TEXT'
     textChange: string
 }
+type AddMessageType = {
+    type:'ADD-MESSAGE'
+}
+type UpdateNewMessageType = {
+    type: 'UPDATE-NEW-MESSAGE-TEXT'
+    value:string
+}
 
-type DispatchType = AddPostType | updateNewPostChangeType
+type DispatchType = AddPostType | updateNewPostChangeType | UpdateNewMessageType | AddMessageType
 
 let store: StoreType = {
     _state: {
@@ -78,7 +86,8 @@ let store: StoreType = {
                 {id: 1, message: 'Now',},
                 {id: 1, message: 'Hello',},
                 {id: 1, message: 'My friend',},
-            ]
+            ],
+            newMessage: ''
         }
     },
     getState() {
@@ -122,7 +131,8 @@ let store: StoreType = {
 
     },
     dispatch(action: DispatchType) {
-        if(action.type === 'ADD-POST') {
+
+        if (action.type === 'ADD-POST') {
             const newPost: PostsType = {
                 id: new Date().getTime(),
                 message: this._state.profile.newPosts,
@@ -132,27 +142,51 @@ let store: StoreType = {
             this._state.profile.newPosts = ''
             this._rerenderTree()
         }
-        else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profile.newPosts = action.textChange
             this._rerenderTree()
         }
+        if (action.type === 'ADD-MESSAGE') {
+            const newMessage: MessageType = {
+                id: 1,
+                message: this._state.dialogs.newMessage,
 
+            }
+            this._state.dialogs.message.push(newMessage)
+            this._state.dialogs.newMessage = ''
+            this._rerenderTree()
+        }
+        else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT'){
+            this._state.dialogs.newMessage = action.value
+            this._rerenderTree()
+        }
     }
 }
 
-export const addPostActionCreator= (): AddPostType => {
+export const addPostActionCreator = (): AddPostType => {
     return {
         type: 'ADD-POST'
     }
 }
 
-export const updateNewPostChange= (value: string): updateNewPostChangeType => {
+export const updateNewPostChange = (value: string): updateNewPostChangeType => {
     return {
         type: 'UPDATE-NEW-POST-TEXT',
         textChange: value
     }
 }
+export const updateNewMessageChange = (value: string): UpdateNewMessageType => {
+        return {
+            type: "UPDATE-NEW-MESSAGE-TEXT",
+            value: value
+        }
+}
 
+export const addMessageActionCreator = (): AddMessageType => {
+    return {
+        type: 'ADD-MESSAGE'
+    }
+}
 
 
 export default store;

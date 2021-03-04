@@ -1,26 +1,36 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 
 import {Dialog, PersonType} from "./Dialog/Dialog";
 import {Messages, MessagesType} from "./messages/Messages";
+import {addMessageActionCreator, updateNewMessageChange} from "../../Redux/State";
 
 type DialogProps = {
 
     dialog: Array<PersonType>
     message: Array<MessagesType>
-    addMessage: (messageText: string) => void
+    Dispatch: (action:object) => void
 }
 
 
 export function Dialogs(props: DialogProps) {
 
 
-    let newMessage = React.createRef<HTMLTextAreaElement>()
-    const addMessages = () => {
-        if (newMessage.current)
-            props.addMessage(newMessage.current.value)
+
+    const changeMessages = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let value = e.currentTarget.value
+        if (value)
+
+            props.Dispatch(updateNewMessageChange(value))
 
     }
+    const addMessages = () => {
+
+
+            props.Dispatch(addMessageActionCreator())
+
+    }
+
 
     let dialogsElements = props.dialog.map(t => {
         return <Dialog
@@ -49,7 +59,7 @@ export function Dialogs(props: DialogProps) {
                 {messagesElements}
             </div>
             <div>
-                <textarea ref={newMessage}></textarea>
+                <textarea onChange={changeMessages}></textarea>
                 <button onClick={addMessages}>Add</button>
             </div>
         </div>

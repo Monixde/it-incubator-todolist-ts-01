@@ -25,7 +25,7 @@ function App(props: StateType) {
             <div className={"App_content"}>
                 <Route path={'/Dialogs'} render={() =>
                     <Dialogs
-                        addMessage={props.state.addMessage.bind(props.state)}
+                        Dispatch={props.state.dispatch.bind(props.state)}
                         dialog={props.state._state.dialogs.dialog}
                         message={props.state._state.dialogs.message}
                     />}
@@ -33,7 +33,7 @@ function App(props: StateType) {
                 <Route path={'/Profile'} render={() =>
                     <Profile value={props.state._state.profile.newPosts}
                              Dispatch={props.state.dispatch.bind(props.state)}
-                             /*addPost={props.state.dispatch.bind(props.state)}*/
+
                              post={props.state._state.profile.posts}
                     />}
                 />
