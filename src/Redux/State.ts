@@ -1,9 +1,12 @@
-type MessageType = {
+import profileReducer from "./Reducer/ProfileReducer";
+import dialogsReducer from "./Reducer/DialogsReducer";
+
+export type MessageType = {
     id: number
     message: string
 }
 
-type DialogType = {
+export type DialogType = {
     id: number
     name: string
     route: string
@@ -14,12 +17,12 @@ export type PostsType = {
     message: string
     likeCount: number
 }
-type profilePageType = {
+export type profilePageType = {
     posts: Array<PostsType>
     newPosts: string
 
 }
-type dialogsPageType = {
+export type dialogsPageType = {
     dialog: Array<DialogType>
     message: Array<MessageType>
     newMessage: string
@@ -39,22 +42,22 @@ export type StoreType = {
     dispatch: (action: any) => void
 }
 
-type AddPostType = {
+export type AddPostType = {
     type: 'ADD-POST'
 }
-type updateNewPostChangeType = {
+export type updateNewPostChangeType = {
     type: 'UPDATE-NEW-POST-TEXT'
     textChange: string
 }
-type AddMessageType = {
+export type AddMessageType = {
     type:'ADD-MESSAGE'
 }
-type UpdateNewMessageType = {
+export type UpdateNewMessageType = {
     type: 'UPDATE-NEW-MESSAGE-TEXT'
     value:string
 }
 
-type DispatchType = AddPostType | updateNewPostChangeType | UpdateNewMessageType | AddMessageType
+export type DispatchType = AddPostType | updateNewPostChangeType | UpdateNewMessageType | AddMessageType
 
 let store: StoreType = {
     _state: {
@@ -131,35 +134,10 @@ let store: StoreType = {
 
     },
     dispatch(action: DispatchType) {
+        this._state.profile = profileReducer(this._state.profile, action)
+        this._state.dialogs = dialogsReducer(this._state.dialogs, action)
+        this._rerenderTree()
 
-        if (action.type === 'ADD-POST') {
-            const newPost: PostsType = {
-                id: new Date().getTime(),
-                message: this._state.profile.newPosts,
-                likeCount: 0
-            }
-            this._state.profile.posts.push(newPost)
-            this._state.profile.newPosts = ''
-            this._rerenderTree()
-        }
-        if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profile.newPosts = action.textChange
-            this._rerenderTree()
-        }
-        if (action.type === 'ADD-MESSAGE') {
-            const newMessage: MessageType = {
-                id: 1,
-                message: this._state.dialogs.newMessage,
-
-            }
-            this._state.dialogs.message.push(newMessage)
-            this._state.dialogs.newMessage = ''
-            this._rerenderTree()
-        }
-        else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT'){
-            this._state.dialogs.newMessage = action.value
-            this._rerenderTree()
-        }
     }
 }
 
