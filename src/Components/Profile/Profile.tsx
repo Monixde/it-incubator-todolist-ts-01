@@ -15,7 +15,7 @@ export type ProfileProps = {
 
 
 function Profile(props: ProfileProps) {
-
+    
 
     let postsElements = props.post.map(p => {
             return <Post
@@ -55,7 +55,7 @@ function Profile(props: ProfileProps) {
             </div>
             <div>
                 <Button onClick={addPost} variant={"contained"}  color={"primary"} > Send </Button>
-                
+
             </div>
             {postsElements}
         </div>

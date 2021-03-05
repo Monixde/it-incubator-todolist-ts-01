@@ -37,7 +37,7 @@ export type StoreType = {
     _rerenderTree: () => void
     addPost: (postText: string) => void
     updateNewPost: (textChange: string) => void
-    observer: (lithen: () => void) => void
+    subscribe: (lithen: () => void) => void
     addMessage: (messageText: string) => void
     dispatch: (action: any) => void
 }
@@ -117,7 +117,7 @@ let store: StoreType = {
 
     },
 
-    observer(lithen) {
+    subscribe(lithen) {
         this._rerenderTree = lithen
     },
     addMessage(messageText: string) {
@@ -144,4 +144,3 @@ let store: StoreType = {
 
 export default store;
 // @ts-ignore
-window.store = store;

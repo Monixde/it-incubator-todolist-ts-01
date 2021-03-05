@@ -1,7 +1,28 @@
-import {AddMessageType, DispatchType, MessageType, UpdateNewMessageType} from "../State";
+import {AddMessageType, dialogsPageType, DispatchType, MessageType, UpdateNewMessageType} from "../Store";
+
+const initialState:dialogsPageType = {
+    dialog: [
+        {id: 1, name: 'Даник', route: '2'},
+        {id: 1, name: 'Артем', route: '1'},
+        {id: 1, name: 'Оля', route: '3'},
+        {id: 1, name: 'Гриша', route: '4'},
+        {id: 1, name: 'Максим', route: '5'},
+        {id: 1, name: 'Hello', route: '6'},
+    ],
+
+    message: [
+        {id: 1, message: 'What',},
+        {id: 1, message: 'You',},
+        {id: 1, message: 'Doing',},
+        {id: 1, message: 'Now',},
+        {id: 1, message: 'Hello',},
+        {id: 1, message: 'My friend',},
+    ],
+    newMessage: ''
+}
 
 
-const dialogsReducer = (state: any, action: DispatchType) => {
+const dialogsReducer = (state= initialState, action: DispatchType):dialogsPageType => {
     switch (action.type) {
         case 'ADD-MESSAGE':
             const newMessage: MessageType = {
@@ -34,7 +55,6 @@ export const addMessageActionCreator = (): AddMessageType => {
         type: 'ADD-MESSAGE'
     }
 }
-
 
 
 export default dialogsReducer;

@@ -1,7 +1,18 @@
-import {AddPostType, DispatchType, PostsType, profilePageType, updateNewPostChangeType} from "../State";
+import {AddPostType, DispatchType, PostsType, profilePageType, updateNewPostChangeType} from "../Store";
 
+const initialState:profilePageType = {
+        posts: [
+            {id: 1, message: 'Привет', likeCount: 152},
+            {id: 1, message: 'Как Жизнь молодая', likeCount: 122},
+            {id: 1, message: 'Неплохо', likeCount: 12},
+            {id: 1, message: 'А у тебя', likeCount: 13},
+            {id: 1, message: 'Hello', likeCount: 12},
+            {id: 1, message: 'Hello', likeCount: 132},
+        ],
+        newPosts: ''
+    }
+ const profileReducer = (state = initialState ,action:DispatchType):profilePageType => {
 
- const profileReducer = (state:profilePageType,action:DispatchType) => {
     switch (action.type) {
         case 'ADD-POST':
 

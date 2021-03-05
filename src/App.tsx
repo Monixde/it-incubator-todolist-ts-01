@@ -7,14 +7,18 @@ import {Dialogs} from "./Components/Dialogs/Dialogs";
 import {Route} from 'react-router-dom';
 import {Music} from './Components/Music/Music';
 import {Settings} from "./Components/Settings/Settings";
-import {StoreType} from "./Redux/State";
+import store from "./Redux/ReduxStore";
+import {rootStateType} from "./Redux/Store";
+
 
 type StateType = {
-    state: StoreType
+    state: rootStateType
+    store: any
 }
 
 
 function App(props: StateType) {
+
 
 
     return (
@@ -25,16 +29,16 @@ function App(props: StateType) {
             <div className={"App_content"}>
                 <Route path={'/Dialogs'} render={() =>
                     <Dialogs
-                        Dispatch={props.state.dispatch.bind(props.state)}
-                        dialog={props.state._state.dialogs.dialog}
-                        message={props.state._state.dialogs.message}
+                        Dispatch={props.store.dispatch.bind(props.state)}
+                        dialog={props.state.dialogs.dialog}
+                        message={props.state.dialogs.message}
                     />}
                 />
                 <Route path={'/Profile'} render={() =>
-                    <Profile value={props.state._state.profile.newPosts}
-                             Dispatch={props.state.dispatch.bind(props.state)}
+                    <Profile value={props.state.profile.newPosts}
+                             Dispatch={props.store.dispatch.bind(props.state)}
 
-                             post={props.state._state.profile.posts}
+                             post={props.state.profile.posts}
                     />}
                 />
                 <Route path={'/Music'} render={() => <Music/>}/>
