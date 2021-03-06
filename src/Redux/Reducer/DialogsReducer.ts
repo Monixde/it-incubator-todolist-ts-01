@@ -30,14 +30,19 @@ const dialogsReducer = (state= initialState, action: DispatchType):dialogsPageTy
                 message: state.newMessage,
 
             }
-            state.message.push(newMessage)
-            state.newMessage = ''
-            return state
+            const newMessageText= {...state}
+            newMessageText.message = [...state.message]
+            newMessageText.dialog = [...state.dialog]
+
+            newMessageText.message.push(newMessage)
+            newMessageText.newMessage = ''
+            return newMessageText
 
 
         case 'UPDATE-NEW-MESSAGE-TEXT':
-            state.newMessage = action.value
-            return state
+            let newState = {...state}
+            newState.newMessage = action.value
+            return newState
 
         default:
             return state

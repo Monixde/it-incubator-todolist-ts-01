@@ -21,13 +21,15 @@ const initialState:profilePageType = {
             message:state.newPosts,
             likeCount: 0
         }
-        state.posts.push(newPost)
-        state.newPosts = ''
-            return state
+        const newPosts = {...state}
+        newPosts.posts = [...state.posts]
+        newPosts.posts.push(newPost)
+        newPosts.newPosts = ''
+            return newPosts
         case 'UPDATE-NEW-POST-TEXT':
-
-            state.newPosts = action.textChange
-            return state
+            let nPost = {...state}
+            nPost.newPosts = action.textChange
+            return nPost
 
 
         default:
