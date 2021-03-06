@@ -56,7 +56,7 @@ export function DialogsContainer(props: DialogsContainerProps) {
     return (
         <div className={s.dialogs}>
            <Dialogs
-               value={state.dialogs.message.newMessage}
+               value={state.dialogs.newMessage}
                addMessage={addMessages}
                changeMessage={changeMessages}
                dialog={dialogsElements}
