@@ -3,41 +3,35 @@ import s from './Profile.module.css';
 import {Post, post} from "./Post/Post";
 import {addPostActionCreator, updateNewPostChange} from "../../Redux/Reducer/ProfileReducer";
 import {Button} from "@material-ui/core";
+import {PostsType} from "../../Redux/Store";
 
 
 export type ProfileProps = {
-    post: Array<post>
+    addPost: ()=>void
     // addPost: (postText: string) => void
-    Dispatch: (action:object) => void
+    updateNewChange: (value:string) => void
+    post: Array<post>
     value: string
 
 }
 
 
 function Profile(props: ProfileProps) {
-    
 
-    let postsElements = props.post.map(p => {
-            return <Post
-                likeCount={p.likeCount}
-                id={p.id}
-                message={p.message}
-            />
-        }
-    )
+
 
 
     let addPost = () => {
 
 
-        props.Dispatch(addPostActionCreator())
+        props.addPost()
 
 
 
     }
     let updateNewChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let value =  e.currentTarget.value
-            props.Dispatch(updateNewPostChange(value))
+            props.updateNewChange(value)
     }
 
 
@@ -57,7 +51,7 @@ function Profile(props: ProfileProps) {
                 <Button onClick={addPost} variant={"contained"}  color={"primary"} > Send </Button>
 
             </div>
-            {postsElements}
+            {props.post}
         </div>
     );
 }
