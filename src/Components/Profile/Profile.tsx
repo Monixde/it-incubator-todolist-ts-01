@@ -7,31 +7,34 @@ import {PostsType} from "../../Redux/Store";
 
 
 export type ProfileProps = {
-    addPost: ()=>void
+    addPost: () => void
     // addPost: (postText: string) => void
-    updateNewChange: (value:string) => void
-    post: Array<post>
+    updateNewChange: (value: string) => void
+    post: Array<PostsType>
     value: string
 
 }
 
-
 function Profile(props: ProfileProps) {
 
-
+    let postsElements = props.post.map((p: post) => {
+            return <Post
+                likeCount={p.likeCount}
+                id={p.id}
+                message={p.message}
+            />
+        }
+    )
 
 
     let addPost = () => {
 
-
         props.addPost()
-
-
 
     }
     let updateNewChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let value =  e.currentTarget.value
-            props.updateNewChange(value)
+        let value = e.currentTarget.value
+        props.updateNewChange(value)
     }
 
 
@@ -48,10 +51,10 @@ function Profile(props: ProfileProps) {
                 <textarea onChange={updateNewChange} value={props.value}/>
             </div>
             <div>
-                <Button onClick={addPost} variant={"contained"}  color={"primary"} > Send </Button>
+                <Button onClick={addPost} variant={"contained"} color={"primary"}> Send </Button>
 
             </div>
-            {props.post}
+            {postsElements}
         </div>
     );
 }

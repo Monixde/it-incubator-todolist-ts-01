@@ -1,51 +1,40 @@
-import React, {ChangeEvent} from 'react';
-import s from './Profile.module.css';
-import {Post, post} from "./Post/Post";
+import React from 'react';
+
 import {addPostActionCreator, updateNewPostChange} from "../../Redux/Reducer/ProfileReducer";
-import {Button} from "@material-ui/core";
-import Profile from "./Profile";
-import {StoreType} from "../../Redux/Store";
+
+import Profile, {ProfileProps} from "./Profile";
+import {PostsType} from "../../Redux/Store";
+import {connect, ConnectedComponent} from "react-redux";
+import {StoreReducerType} from "../../Redux/ReduxStore";
 
 
-export type ProfileContainerProps = {
-    store: any
+export type MapToState = {
+    post: Array<PostsType>
+    value: string
 
+}
+type MapToDispatch = {
+    addPost: () => void
+    updateNewChange: (value: string) => void
 }
 
 
-export function ProfileContainer(props: ProfileContainerProps) {
-
-    const state = props.store.getState()
-
-    let postsElements = state.profile.posts.map((p:post) => {
-            return <Post
-                likeCount={p.likeCount}
-                id={p.id}
-                message={p.message}
-            />
+const mapToState = (state: StoreReducerType): MapToState => {
+    return {
+        post: state.profile.posts,
+        value: state.profile.newPosts
+    }
+}
+const mapToDispatch = (dispatch: (action: any) => void): MapToDispatch => {
+    return {
+        addPost: () => {
+            dispatch(addPostActionCreator())
+        },
+        updateNewChange: (value: string) => {
+            dispatch(updateNewPostChange(value))
         }
-    )
-
-
-    let addPost = () => {
-
-
-        props.store.dispatch(addPostActionCreator())
-
-
-
     }
-    let updateNewChange = (value:string) => {
-
-            props.store.dispatch(updateNewPostChange(value))
-    }
-
-
-    return (
-        <div className={s.con}>
-            <Profile addPost={addPost} updateNewChange={updateNewChange} post={postsElements} value={state.profile.newPosts}/>
-        </div>
-    );
 }
 
 
+export const ProfileContainer = connect<MapToState, MapToDispatch, {}, StoreReducerType>(mapToState, mapToDispatch)(Profile)
