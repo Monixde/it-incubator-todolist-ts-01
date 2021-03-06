@@ -1,8 +1,8 @@
 import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 
-import {PersonType} from "./Dialog/Dialog";
-import {MessagesType} from "./messages/Messages";
+import {Dialog, PersonType} from "./Dialog/Dialog";
+import {Messages, MessagesType} from "./messages/Messages";
 
 import {Button} from "@material-ui/core";
 
@@ -19,6 +19,22 @@ type DialogProps = {
 
 export function Dialogs(props: DialogProps) {
 
+    let dialogsElements = props.dialog.map((t: { id: number; name: string; }) => {
+        return <Dialog
+            key={t.id}
+            name={t.name}
+            id={t.id}
+            route={`'/dialogs/'${t.id}`}
+        />
+    })
+
+    let messagesElements = props.message.map((t: { message: string; id: number; }) => {
+        return <Messages
+            message={t.message}
+            id={t.id}
+
+        />
+    })
 
     const changeMessages = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let value = e.currentTarget.value
@@ -35,16 +51,14 @@ export function Dialogs(props: DialogProps) {
     }
 
 
-
-
     return (
         <div className={s.dialogs}>
             <div className={s.dialogs_item}>
 
-                {props.dialog}
+                {dialogsElements}
             </div>
             <div className={s.messages}>
-                {props.message}
+                {messagesElements}
             </div>
             <div>
                 <textarea onChange={changeMessages} value={props.value}></textarea>

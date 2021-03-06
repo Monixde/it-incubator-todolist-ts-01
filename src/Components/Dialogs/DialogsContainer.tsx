@@ -1,67 +1,42 @@
-import React, {ChangeEvent} from "react";
-import s from './Dialogs.module.css'
-
-import {Dialog} from "./Dialog/Dialog";
-import {Messages} from "./messages/Messages";
+import React from "react";
+import {PersonType} from "./Dialog/Dialog";
+import {MessagesType} from "./messages/Messages";
 import {addMessageActionCreator, updateNewMessageChange} from "../../Redux/Reducer/DialogsReducer";
-
 import {Dialogs} from "./Dialogs";
+import {connect} from "react-redux";
+import {StoreReducerType} from "../../Redux/ReduxStore";
 
 
+type mapDispatch = {
+    changeMessage: (value: string) => void
+    addMessage: () => void
+}
 
-type DialogsContainerProps = {
-    store: any
-    /*dialog: Array<PersonType>
+
+type mapStateDialogsType = {
+    dialog: Array<PersonType>
     message: Array<MessagesType>
-    Dispatch: (action:object) => void*/
+    value: string
 }
 
-
-export function DialogsContainer(props: DialogsContainerProps) {
-
-    const state = props.store.getState()
-
-    const changeMessages = (value:string) => {
-
-        if (value)
-
-           props.store.dispatch(updateNewMessageChange(value))
-
+function mapStateDialogs(state: StoreReducerType): mapStateDialogsType {
+    return {
+        dialog: state.dialogs.dialog,
+        message: state.dialogs.message,
+        value: state.dialogs.newMessage
     }
-    const addMessages = () => {
-
-
-            props.store.dispatch(addMessageActionCreator())
-
-    }
-
-
-    let dialogsElements = state.dialogs.dialog.map((t: { id: number; name: string; }) => {
-        return <Dialog
-            key={t.id}
-            name={t.name}
-            id={t.id}
-            route={`'/dialogs/'${t.id}`}
-        />
-    })
-
-    let messagesElements = state.dialogs.message.map((t: { message: string; id: number; }) => {
-        return <Messages
-            message={t.message}
-            id={t.id}
-
-        />
-    })
-
-    return (
-        <div className={s.dialogs}>
-           <Dialogs
-               value={state.dialogs.newMessage}
-               addMessage={addMessages}
-               changeMessage={changeMessages}
-               dialog={dialogsElements}
-               message={messagesElements}
-           />
-        </div>
-    )
 }
+
+function mapToDispatch(dispatch: (action: any) => void): mapDispatch {
+    return {
+        changeMessage: (value: string) => {
+            dispatch(updateNewMessageChange(value))
+
+        },
+        addMessage: () => {
+            dispatch(addMessageActionCreator())
+        }
+    }
+}
+
+export const DialogsContainer = connect<mapStateDialogsType, mapDispatch, {}, StoreReducerType>(mapStateDialogs, mapToDispatch)(Dialogs)

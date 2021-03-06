@@ -10,11 +10,11 @@ import {Settings} from "./Components/Settings/Settings";
 
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
 import {ProfileContainer} from "./Components/Profile/ProfileContainer";
-import store from "./Redux/ReduxStore";
+
 
 
 function App() {
-debugger
+    
 
     return (
 
@@ -24,19 +24,10 @@ debugger
             <div className={"App_content"}>
                 <Route path={'/Dialogs'} render={() =>
                     <DialogsContainer
-                        store={store}
-                        /*Dispatch={props.store.dispatch.bind(props.state)}
-                        dialog={props.state.dialogs.dialog}
-                        message={props.state.dialogs.message}*/
                     />}
                 />
                 <Route path={'/Profile'} render={() =>
                     <ProfileContainer
-
-                        /*value={props.state.profile.newPosts}
-                             Dispatch={props.store.dispatch.bind(props.state)}
-
-                             post={props.state.profile.posts}*/
                     />}
                 />
                 <Route path={'/Music'} render={() => <Music/>}/>

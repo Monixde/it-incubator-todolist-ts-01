@@ -1,14 +1,12 @@
 import React, {ChangeEvent} from 'react';
 import s from './Profile.module.css';
 import {Post, post} from "./Post/Post";
-import {addPostActionCreator, updateNewPostChange} from "../../Redux/Reducer/ProfileReducer";
 import {Button} from "@material-ui/core";
 import {PostsType} from "../../Redux/Store";
 
 
 export type ProfileProps = {
     addPost: () => void
-    // addPost: (postText: string) => void
     updateNewChange: (value: string) => void
     post: Array<PostsType>
     value: string

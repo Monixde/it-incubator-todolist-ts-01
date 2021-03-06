@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from "react-router-dom";
 import store from "./Redux/ReduxStore";
-import {dialogsPageType, profilePageType} from "./Redux/Store";
+
 import {Provider} from "react-redux";
 
 
