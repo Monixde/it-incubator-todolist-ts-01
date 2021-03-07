@@ -9,6 +9,7 @@ function Menu() {
             <div><NavLink to={"/Dialogs"} activeClassName={s.activLink}>Message</NavLink></div>
             <div><NavLink to={"/Music"} activeClassName={s.activLink}>Music</NavLink></div>
             <div><NavLink to={"/Settings"} activeClassName={s.activLink}> Settings </NavLink></div>
+            <div><NavLink to={"/Users"} activeClassName={s.activLink}> Users </NavLink></div>
 
         </div>
     );

@@ -56,8 +56,16 @@ export type UpdateNewMessageType = {
     type: 'UPDATE-NEW-MESSAGE-TEXT'
     value:string
 }
+type FollowedActionCreatorType ={
+    type: 'CHANGE-FOLLOWED'
+    userId:number
+}
+type UnFollowedActionCreatorType = {
+    type: 'CHANGE-UNFOLLOWED'
+    userId:number
+}
 
-export type DispatchType = AddPostType | updateNewPostChangeType | UpdateNewMessageType | AddMessageType
+export type DispatchType = AddPostType | updateNewPostChangeType | UpdateNewMessageType | AddMessageType | UnFollowedActionCreatorType| FollowedActionCreatorType
 
 let store: StoreType = {
     _state: {

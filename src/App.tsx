@@ -11,6 +11,8 @@ import {Settings} from "./Components/Settings/Settings";
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
 import {ProfileContainer} from "./Components/Profile/ProfileContainer";
 
+import {UsersContainer} from "./Components/Users/UsersContainer";
+
 
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
                     />}
                 />
                 <Route path={'/Music'} render={() => <Music/>}/>
+
+                <Route path={'/Users'} render={() => <UsersContainer/>}/>
                 <Route path={'/Settings'} render={() => <Settings/>}/>
 
 

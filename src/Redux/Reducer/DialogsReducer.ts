@@ -1,6 +1,6 @@
 import {AddMessageType, dialogsPageType, DispatchType, MessageType, UpdateNewMessageType} from "../Store";
 
-const initialState:dialogsPageType = {
+const initialState: dialogsPageType = {
     dialog: [
         {id: 1, name: 'Даник', route: '2'},
         {id: 1, name: 'Артем', route: '1'},
@@ -22,7 +22,7 @@ const initialState:dialogsPageType = {
 }
 
 
-const dialogsReducer = (state= initialState, action: DispatchType):dialogsPageType => {
+const dialogsReducer = (state = initialState, action: DispatchType): dialogsPageType => {
 
 
     switch (action.type) {
@@ -42,7 +42,7 @@ const dialogsReducer = (state= initialState, action: DispatchType):dialogsPageTy
 
 
         case 'UPDATE-NEW-MESSAGE-TEXT':
-                       
+
             return {
                 ...state,
                 newMessage: action.value
