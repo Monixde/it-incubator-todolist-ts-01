@@ -23,6 +23,12 @@ const initialState:dialogsPageType = {
 
 
 const dialogsReducer = (state= initialState, action: DispatchType):dialogsPageType => {
+
+    let stateCopy = {
+        ...state
+
+    }
+
     switch (action.type) {
         case 'ADD-MESSAGE':
             const newMessage: MessageType = {
@@ -30,19 +36,16 @@ const dialogsReducer = (state= initialState, action: DispatchType):dialogsPageTy
                 message: state.newMessage,
 
             }
-            const newMessageText= {...state}
-            newMessageText.message = [...state.message]
-            newMessageText.dialog = [...state.dialog]
 
-            newMessageText.message.push(newMessage)
-            newMessageText.newMessage = ''
-            return newMessageText
+            stateCopy.message = [...stateCopy.message, newMessage]
+            stateCopy.newMessage = ''
+            return stateCopy
 
 
         case 'UPDATE-NEW-MESSAGE-TEXT':
-            let newState = {...state}
-            newState.newMessage = action.value
-            return newState
+
+            stateCopy.newMessage = action.value
+            return stateCopy
 
         default:
             return state
