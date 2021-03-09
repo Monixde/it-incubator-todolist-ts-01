@@ -10,6 +10,7 @@ import {
     setUsersActionCreator,
     UnFollowedActionCreator
 } from "../../Redux/Reducer/UserReducer";
+import {UserC} from "./UserС";
 
 
 
@@ -45,5 +46,5 @@ function mapToDispatchUsers(dispatch: (action: actionCreatorUserType) => void): 
     }
 }
 
-export const UsersContainer = connect<mapToUsersType, mapToDispatchType, {}, StoreReducerType>(mapToUserState, mapToDispatchUsers)(User)
+export const UsersContainer = connect<mapToUsersType, mapToDispatchType, {}, StoreReducerType>(mapToUserState, mapToDispatchUsers)(UserC)
 

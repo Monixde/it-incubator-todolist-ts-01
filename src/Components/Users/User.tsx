@@ -26,19 +26,22 @@ type AllUsersType = {
 }
 
 export function User(props: AllUsersType) {
-debugger
-    if(props.state.length === 0) {
+    const getUsers =  () => {
+        if(props.state.length === 0) {
 
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then( responze => {
-            console.log(responze.data.items)
-            props.setUsers( responze.data.items)
-        })
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then( responze => {
+                console.log(responze.data.items)
+                props.setUsers( responze.data.items)
+            })
+        }
 
-         }
+
+    }
 
 
 
     return (<div>
+        <Button onClick={getUsers} variant={"contained"} color={"primary"}>Get Users</Button>
         {
             props.state.map(u => <div key={u.id} className={m.user}>
                     <div>
